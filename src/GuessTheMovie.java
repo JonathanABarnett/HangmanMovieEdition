@@ -5,7 +5,7 @@ public class GuessTheMovie {
     private String movie;
     private char[] charMovie;
     private int numberOfGuesses = 0;
-    private int maxGuess = 10;
+    private int maxGuess = 6;
     private ArrayList<String> guessedLetters = new ArrayList<>();
     private Movies movies = new Movies();
     private Scanner reader = new Scanner(System.in);
@@ -18,6 +18,9 @@ public class GuessTheMovie {
      * the max number of wrong guesses.
      */
     public void start() {
+        System.out.println("Thanks for playing HangMan - Movie Edition!\n" +
+        "You have to guess the movie title by guessing 1 letter at a time.\n" +
+        "If you guess wrong " + maxGuess + " times, you lose. Good Luck!");
         movie = movies.getMovie();
         charMovie = stringToArray(movie.toLowerCase());
         //System.out.println(movie);
@@ -135,6 +138,7 @@ public class GuessTheMovie {
         }
         System.out.println(displayWord);
         System.out.println("You have guessed incorrectly " + numberOfGuesses + " times so far.");
+        hangmanBoard(numberOfGuesses);
     }
 
     /**
@@ -152,8 +156,92 @@ public class GuessTheMovie {
                 displayWord[i] = ' ';
             }
         }
+        hangmanBoard(numberOfGuesses);
+        System.out.println();
         System.out.println(displayWord);
         System.out.println();
+    }
+
+    /**
+     * Displays the hangman board, increasing the parts of the man each time
+     * an incorrect letter is guessed.
+     *
+     * @param wrongGuesses the amount of wrong guesses.
+     */
+    private void hangmanBoard(int wrongGuesses) {
+        switch (wrongGuesses) {
+            case 0:
+                System.out.println(
+                        "____\n" +
+                                "|   |\n" +
+                                "|   \n" +
+                                "|  \n" +
+                                "|   \n" +
+                                "|   \n" +
+                                "|___");
+                break;
+            case 1:
+                System.out.println(
+                        "____\n" +
+                                "|   |\n" +
+                                "|   O\n" +
+                                "|  \n" +
+                                "|   \n" +
+                                "|   \n" +
+                                "|___");
+                break;
+            case 2:
+                System.out.println(
+                        "____\n" +
+                                "|   |\n" +
+                                "|   O\n" +
+                                "|   |\n" +
+                                "|   \n" +
+                                "|   \n" +
+                                "|___");
+                break;
+            case 3:
+                System.out.println(
+                        "____\n" +
+                                "|   |\n" +
+                                "|   O\n" +
+                                "|  -|\n" +
+                                "|   \n" +
+                                "|   \n" +
+                                "|___");
+                break;
+            case 4:
+                System.out.println(
+                        "____\n" +
+                                "|   |\n" +
+                                "|   O\n" +
+                                "|  -|-\n" +
+                                "|   \n" +
+                                "|   \n" +
+                                "|___");
+                break;
+            case 5:
+                System.out.println(
+                        "____\n" +
+                                "|   |\n" +
+                                "|   O\n" +
+                                "|  -|-\n" +
+                                "|   /\n" +
+                                "|   \n" +
+                                "|___");
+                break;
+            case 6:
+                System.out.println(
+                        "____\n" +
+                                "|   |\n" +
+                                "|   O\n" +
+                                "|  -|-\n" +
+                                "|   /\\\n" +
+                                "|   \n" +
+                                "|___");
+                break;
+
+        }
     }
 
 }
